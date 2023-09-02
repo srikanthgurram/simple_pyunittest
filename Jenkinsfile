@@ -42,7 +42,9 @@ pipeline {
             junit '*.xml'
         }
         failure {
-            mail bcc: '', body: '"The Pipeline failed"', cc: '', from: '', replyTo: '', subject: 'Jenkins Build failure', to: '2gurram@gmail.com'
+            emailext body: 'Test Message',
+            subject: 'Jenkins Build failure', 
+            to: '2gurram@gmail.com'
         }
     }
 }
