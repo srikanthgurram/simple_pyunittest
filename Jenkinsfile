@@ -20,8 +20,8 @@ pipeline {
                 RERUN_COUNT = 2
             }
             steps {
-                echo "Running Unit tests with global variables ${TEST_USER_NAME} and ${TEST_USER_PASSWORD}"
-                echo "Tests set for maximum timeout of ${MAX_TIMEOUT} and re-run for ${RERUN_COUNT}"
+                bat 'echo Running Unit tests with global variables %TEST_USER_NAME% and %TEST_USER_PASSWORD%'
+                echo "Tests set for maximum timeout of ${MAX_TIMEOUT} seconds and re-run on failure for ${RERUN_COUNT} times"
                 bat 'python -m pytest --junit-xml=pytest_unit.xml unit_tests.py'
                 junit 'pytest_unit.xml'
             }
