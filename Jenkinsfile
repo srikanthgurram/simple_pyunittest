@@ -15,8 +15,13 @@ pipeline {
             }
         }
         stage('Test') {
+            environment {
+                MAX_TIMEOUT = 120
+                RERUN_COUNT = 2
+            }
             steps {
-                echo "Running Unit tests with global variables ${env.TEST_USER_NAME} and ${env.TEST_USER_PASSWORD}"
+                echo "Running Unit tests with global variables ${TEST_USER_NAME} and ${TEST_USER_PASSWORD}"
+                echo "Tests set for maximum timeout of ${MAX_TIMEOUT} and re-run for ${RERUN_COUNT}"
                 bat 'python -m pytest --junit-xml=pytest_unit.xml unit_tests.py'
                 junit 'pytest_unit.xml'
             }
