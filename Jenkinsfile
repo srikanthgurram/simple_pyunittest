@@ -40,11 +40,11 @@ pipeline {
     post {
         always {
             junit '*.xml'
-            archiveArtifacts artifacts: '*.xml, followSymlinks: false
+            archiveArtifacts artifacts: '*.xml', followSymlinks: false
         }
         failure {
             emailext body: 'Test Message',
-            subject: 'Jenkins Build failure', 
+            subject: 'Jenkins Build failure',
             to: '2gurram@gmail.com'
         }
     }
