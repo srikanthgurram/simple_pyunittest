@@ -6,13 +6,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo 'Installing dependancies'
+                bat 'python -m pip install -r requirements.txt'
             }
         }
         stage('Test'){
             steps {
                 echo 'Running Unit tests..'
-                // junit 'reports/**/*.xml'
+                bat 'python -m pytest --junit-xml=pytest_unit.xml unit_tests.py'
             }
         }
         stage('Deploy') {
