@@ -63,6 +63,10 @@ class TestHexaToBinaryConversion(unittest.TestCase):
         # string starts with '00'
         with self.assertRaises(ValueError):
             hex_to_bin(hexstring="00FFFF", width=16)
+    
+    def test_failure(self):
+        # This test is intentionally failed to test the Jenkins pipeline stages
+        self.assertTrue(False)
 
 
 if __name__ == '__main__':
