@@ -40,6 +40,7 @@ pipeline {
     post {
         always {
             junit '*.xml'
+            archiveArtifacts artifacts: '*.xml, followSymlinks: false
         }
         failure {
             emailext body: 'Test Message',
