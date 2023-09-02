@@ -66,7 +66,7 @@ class TestHexaToBinaryConversion(unittest.TestCase):
     
     def test_failure(self):
         # This test is intentionally failed to test the Jenkins pipeline stages
-        self.assertTrue(True)
+        self.assertTrue(False)
 
 
 if __name__ == '__main__':
