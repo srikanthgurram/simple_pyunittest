@@ -10,7 +10,7 @@ pipeline {
                 bat 'python -m pip install -r requirements.txt'
             }
         }
-        stage('Test'){
+        stage('Test') {
             steps {
                 echo 'Running Unit tests..'
                 bat 'python -m pytest --junit-xml=pytest_unit.xml unit_tests.py'
@@ -18,13 +18,14 @@ pipeline {
             }
         }
         stage('Deploy') {
-            steps {
-                when {
-                    expression {
-                        currentBuild.result == null || currentBuild.result == 'SUCCESS'
-                    }
+            when {
+                expression {
+                    currentBuild.result == null || currentBuild.result == 'SUCCESS'
                 }
+            }
+            steps {
                 echo 'Deploying..'
+                echo "Completed ${env.BUILD_ID} on ${env.JENKINS_URL}"
             }
         }
     }
