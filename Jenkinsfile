@@ -14,6 +14,7 @@ pipeline {
             steps {
                 echo 'Running Unit tests..'
                 bat 'python -m pytest --junit-xml=pytest_unit.xml unit_tests.py'
+                junit 'pytest_unit.xml'
             }
         }
         stage('Deploy') {
