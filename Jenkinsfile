@@ -23,7 +23,6 @@ pipeline {
                 bat 'echo Running Unit tests with global variables %TEST_USER_NAME% and %TEST_USER_PASSWORD%'
                 echo "Tests set for maximum timeout of ${MAX_TIMEOUT} seconds and re-run on failure for ${RERUN_COUNT} times"
                 bat 'python -m pytest --junit-xml=pytest_unit.xml unit_tests.py'
-                junit 'pytest_unit.xml'
             }
         }
         stage('Deploy') {
@@ -36,6 +35,14 @@ pipeline {
                 echo 'Deploying..'
                 echo "Completed Build ${env.BUILD_ID} on ${env.JENKINS_URL}"
             }
+        }
+    }
+    post {
+        always {
+            junit '*.xml'
+        }
+        failure {
+            mail to: 2gurram@gmail.com, subject: 'The Pipeline failed :('
         }
     }
 }
